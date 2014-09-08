@@ -15,13 +15,13 @@ while voids
    voids = !(all(nx) & all(ny))
 end
 
-for treshold in linspace(0.01, 0.4, 15)
+for treshold in linspace(0.1, 0.4, 3)
    for replicate in 1:10
       filename = OUT_PATH*"geom_"*string(treshold)*"_rep"*string(replicate)*".json"
-      G = geometric(100, treshold)
+      G = geometric(80, treshold)
       simulate(G,A, output_file=filename)
       filename = OUT_PATH*"er_"*string(treshold)*"_rep"*string(replicate)*".json"
-      G = ER(100, treshold)
+      G = ER(80, treshold)
       simulate(G,A, output_file=filename)
    end
 end

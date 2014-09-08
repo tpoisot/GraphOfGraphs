@@ -1,9 +1,3 @@
-using StatsBase
-using JSON
-
-include("web_generators.jl")
-include("graph_generators.jl")
-
 function migration(sp, p)
    return sp[1:length(sp)][rand(length(sp)).<p]
 end
@@ -54,11 +48,13 @@ function simulate(G,A; init_occupancy=0.2, migration_rate=0.3, extinction_rate=0
       for patch in 1:n_patches
          current_patch = landscape[patch]
          neighbours = [1:n_patches]'[G[patch,:]]
-         for node_color in ["blue", "red"]
-            if length(current_patch[node_color]) > 0
-               migrants = migration(current_patch[node_color], migration_rate)
-               for m in migrants
-                  append!(new_landscape[sample(neighbours)][node_color], [m])
+         if length(neighbours) > 0
+            for node_color in ["blue", "red"]
+               if length(current_patch[node_color]) > 0
+                  migrants = migration(current_patch[node_color], migration_rate)
+                  for m in migrants
+                     append!(new_landscape[sample(neighbours)][node_color], [m])
+                  end
                end
             end
          end

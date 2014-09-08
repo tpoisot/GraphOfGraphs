@@ -22,14 +22,6 @@ function keep(n, k)
    return nn
 end
 
-G = geometric(100, 0.4)
-A = type_one(25, 35, 0.15)
-
-init_occupancy = 0.2
-migration_rate = 0.3
-extinction_rate = 0.1
-timesteps = 100
-
 function simulate(G,A; init_occupancy=0.2, migration_rate=0.3, extinction_rate=0.1, timesteps=100, output_file="sim.json")
    n_patches = size(G)[1]
    n_red = size(A)[2]
